@@ -49,27 +49,27 @@ public class OpenRecActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler);
 
-//        database = new DbHelper(this);
+        database = new DbHelper(this);
         recyclerView = findViewById(R.id.recyclerview);
         btnAdd = findViewById(R.id.btn_add);
         srlData = findViewById(R.id.swl_data);
         pbData = findViewById(R.id.pb_data);
 
-//        final DbHelper dh = new DbHelper(getApplicationContext());
-//        Cursor cursor = dh.tampilKegiatan();
-//        cursor.moveToFirst();
-//        if (cursor.getCount() > 0){
-//            while (!cursor.isAfterLast()){
-//                KegiatanHandler kegiatanHandlerList =new KegiatanHandler();
-//                kegiatanHandlerList.setJudul((cursor.getString(cursor.getColumnIndexOrThrow("judul"))));
-//                kegiatanHandlerList.setDeskripsi((cursor.getString((cursor.getColumnIndexOrThrow("deskripsi")))));
-//                kegiatanHandlerList.setTanggal_Mulai((cursor.getString((cursor.getColumnIndexOrThrow("tanggal_mulai")))));
-//                kegiatanHandlerList.setTanggal_Akhir((cursor.getString((cursor.getColumnIndexOrThrow("tanggal_akhir")))));
-//                kegiatanHandler.add(kegiatanHandlerList);
-//                cursor.moveToNext();
-//            }
-////            dh.close();
-//        }
+        final DbHelper dh = new DbHelper(getApplicationContext());
+        Cursor cursor = dh.tampilKegiatan();
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0){
+            while (!cursor.isAfterLast()){
+                KegiatanHandler kegiatanHandlerList =new KegiatanHandler();
+                kegiatanHandlerList.setJudul((cursor.getString(cursor.getColumnIndexOrThrow("judul"))));
+                kegiatanHandlerList.setDeskripsi((cursor.getString((cursor.getColumnIndexOrThrow("deskripsi")))));
+                kegiatanHandlerList.setTanggal_Mulai((cursor.getString((cursor.getColumnIndexOrThrow("tanggal_mulai")))));
+                kegiatanHandlerList.setTanggal_Akhir((cursor.getString((cursor.getColumnIndexOrThrow("tanggal_akhir")))));
+                kegiatanHandler.add(kegiatanHandlerList);
+                cursor.moveToNext();
+            }
+//            dh.close();
+        }
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,9 +81,9 @@ public class OpenRecActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
-//        openRecAdapter = new OpenRecAdapter(kegiatanHandler,OpenRecActivity.this, recyclerView);
-//        recyclerView.setAdapter(openRecAdapter);
-//        retrieveData();
+        openRecAdapter = new OpenRecAdapter(kegiatanHandler,OpenRecActivity.this, recyclerView);
+        recyclerView.setAdapter(openRecAdapter);
+        retrieveData();
 
         srlData.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
